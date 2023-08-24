@@ -6,44 +6,25 @@ import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    // List of URIs to provide to Android Beam
-    private Uri[] fileUris = new Uri[10];
-    private FileUriCallback fileUriCallback;
 
-
-        private class FileUriCallback implements NfcAdapter.CreateBeamUrisCallback {
-        public FileUriCallback() {
+    //NFC button
+    Button button = findViewById(R.id.nfcButton);
+    button.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+            Log.d("BUTTONS", "User tapped the Supabutton");
         }
-        /**
-         * Create content URIs as needed to share with another device
-         */
-        @Override
-        public Uri[] createBeamUris(NfcEvent event) {
-            return fileUris;
-        }
-    }
-
-
-
+    });
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Android Beam file transfer is available, continue
-        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        /*
-         * Instantiate a new FileUriCallback to handle requests for
-         * URIs
-         */
-        fileUriCallback = new FileUriCallback();
-        // Set the dynamic callback for URI requests.
-        nfcAdapter.setBeamPushUrisCallback(fileUriCallback, this);
-
     }
 }
