@@ -44,6 +44,6 @@ public class MainActivity extends AppCompatActivity {
         fileUriCallback = new FileUriCallback();
         // Set the dynamic callback for URI requests.
         nfcAdapter.setBeamPushUrisCallback(fileUriCallback, this);
-        
+
     }
 }
